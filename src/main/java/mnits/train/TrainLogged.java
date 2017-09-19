@@ -1,5 +1,7 @@
 package mnits.train;
 
+import java.util.List;
+
 import org.ann.Network;
 import org.ann.TrainTracker;
 import org.utilities.core.time.TicToc;
@@ -10,7 +12,7 @@ public class TrainLogged implements TrainTracker {
 
 	private TrainTracker tracker;
 
-	public TrainLogged(Iterable<double[][]> test, int period) {
+	public TrainLogged(List<double[][]> test, int period) {
 		TicToc tic = UtilitiesTime.tic();
 		LambdaInt k = new LambdaInt(0);
 		this.tracker = (Network ann, int epoch, int minibatch) -> {

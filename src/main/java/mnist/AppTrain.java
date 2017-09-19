@@ -3,6 +3,7 @@ package mnist;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.ann.Network;
 
@@ -16,21 +17,27 @@ public class AppTrain {
 
 		System.out.println("reading train...");
 		List<double[][]> train = MNISTDataSet.train(SRC)
-				.map(MNISTDataPair::parseVector)
 				.log((long) 1E4)
-				.toList();
+				.toList()
+				.parallelStream()
+				.map(MNISTDataPair::parseVector)
+				.collect(Collectors.toList());
 		System.out.println("reading test...");
 		List<double[][]> test = MNISTDataSet.test(SRC)
-				.map(MNISTDataPair::parseVector)
 				.log((long) 1E4)
-				.toList();
+				.toList()
+				.parallelStream()
+				.map(MNISTDataPair::parseVector)
+				.collect(Collectors.toList());
 
 		int inputs = train.get(0)[0].length;
 		int outputs = train.get(0)[1].length;
-		Network ann = new Network(inputs, 30, outputs);
-		ann.trainTracker = new TrainLogged(test, 6000);
 
-		ann.SGD(train, 30, 10, 3.0);
+		int miniBatchSize = 10;
+
+		Network ann = Network.basic(inputs, 30, outputs);
+		ann.trainTracker = new TrainLogged(test, train.size() / miniBatchSize);
+		ann.SGD(train, 30, miniBatchSize, 3.0);
 
 	}
 
