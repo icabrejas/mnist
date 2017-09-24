@@ -11,7 +11,6 @@
 		<maven.compile.target>1.8</maven.compile.target>
 	</properties>
 
-
 	<build>
 		<plugins>
 			<plugin>
@@ -32,10 +31,19 @@
 			<artifactId>utilities-io</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+	
 		<dependency>
 			<groupId>org</groupId>
 			<artifactId>ann</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.deeplearning4j/deeplearning4j-core -->
+		<dependency>
+			<groupId>org.deeplearning4j</groupId>
+			<artifactId>deeplearning4j-core</artifactId>
+			<version>0.9.1</version>
+		</dependency>
 	</dependencies>
+	
 </project>
