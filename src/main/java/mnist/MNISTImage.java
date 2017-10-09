@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
 
+import org.utilities.graphics.awt.UtilitiesImage;
+
 public class MNISTImage {
 
 	private int width;
@@ -16,6 +18,20 @@ public class MNISTImage {
 		this.pixels = pixels;
 		if (pixels.length != width * height) {
 			throw new Error();
+		}
+	}
+
+	public MNISTImage(int width, int height, BufferedImage img) {
+		this.width = width;
+		this.height = height;
+		img = UtilitiesImage.scale(img, (float) width / img.getWidth(), (float) height / img.getHeight(), false);
+		this.pixels = new int[this.width * this.height];
+		for (int i = 0; i < width; i++) {
+			for (int j = 0; j < height; j++) {
+				int rgb = img.getRGB(i, j);
+				Color color = new Color(rgb);
+				pixels[i + j * height] = 255 - color.getBlue();
+			}
 		}
 	}
 

@@ -5,10 +5,6 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.ann.Network;
-
-import mnits.train.TrainLogged;
-
 public class AppTrain {
 
 	private static final Path SRC = Paths.get("C:/data/ML databases/MNIST");
@@ -35,9 +31,10 @@ public class AppTrain {
 
 		int miniBatchSize = 10;
 
-		Network ann = Network.basic(inputs, 30, outputs);
-		ann.trainTracker = new TrainLogged(test, train.size() / miniBatchSize);
-		ann.SGD(train, 30, miniBatchSize, 3.0);
+		// Network ann = Network.basic(inputs, 30, outputs);
+		// ann.trainTracker = new TrainLogged(test, train.size() /
+		// miniBatchSize);
+		// ann.SGD(train, 30, miniBatchSize, 3.0);
 
 	}
 

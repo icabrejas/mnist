@@ -31,12 +31,6 @@
 			<artifactId>utilities-io</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-	
-		<dependency>
-			<groupId>org</groupId>
-			<artifactId>ann</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.deeplearning4j/deeplearning4j-core -->
 		<dependency>
@@ -44,6 +38,22 @@
 			<artifactId>deeplearning4j-core</artifactId>
 			<version>0.9.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.nd4j</groupId>
+			<artifactId>nd4j-native-platform</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.datavec</groupId>
+			<artifactId>datavec-api</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org</groupId>
+			<artifactId>utilities-graphics</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
-	
+
 </project>

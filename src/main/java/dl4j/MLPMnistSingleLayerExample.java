@@ -1,5 +1,6 @@
 package dl4j;
 
+import java.io.File;
 import java.io.IOException;
 
 import org.deeplearning4j.datasets.iterator.impl.MnistDataSetIterator;
@@ -13,6 +14,7 @@ import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.nn.weights.WeightInit;
 import org.deeplearning4j.optimize.listeners.ScoreIterationListener;
+import org.deeplearning4j.util.ModelSerializer;
 import org.nd4j.linalg.activations.Activation;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.dataset.DataSet;
@@ -23,6 +25,8 @@ import org.slf4j.LoggerFactory;
 public class MLPMnistSingleLayerExample {
 
 	private static final Logger log = LoggerFactory.getLogger(MLPMnistSingleLayerExample.class);
+
+	public static final File FILE = new File("C:/tmp/mnist.zip");
 
 	public static void main(String[] args) throws IOException {
 
@@ -39,7 +43,9 @@ public class MLPMnistSingleLayerExample {
 		int numEpochs = 15;
 
 		// Get the DataSetIterators:
+		log.info("Reading train data....");
 		MnistDataSetIterator mnistTrain = new MnistDataSetIterator(batchSize, true, rngSeed);
+		log.info("Reading test data....");
 		MnistDataSetIterator mnistTest = new MnistDataSetIterator(batchSize, false, rngSeed);
 
 		log.info("Build model....");
@@ -81,7 +87,9 @@ public class MLPMnistSingleLayerExample {
 
 		log.info("Train model....");
 		for (int i = 0; i < numEpochs; i++) {
+			log.info(i + "/" + numEpochs);
 			model.fit(mnistTrain);
+			ModelSerializer.writeModel(model, FILE, true);
 		}
 
 		log.info("Evaluate model....");
@@ -96,6 +104,9 @@ public class MLPMnistSingleLayerExample {
 		}
 
 		log.info(eval.stats());
+
+		
+
 		log.info("****************Example finished********************");
 
 	}
